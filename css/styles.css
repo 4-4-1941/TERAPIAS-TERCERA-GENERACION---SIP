@@ -728,25 +728,52 @@ body.dark-mode .hero__card {
 }
 
 /* ---------- Modal ---------- */
-.modal {
+/* ---------- Corrección segura de visibilidad ---------- */
+
+[hidden] {
+  display: none !important;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* ---------- Modal de evaluación ---------- */
+
+#assessmentModal {
   position: fixed;
   inset: 0;
   z-index: 1200;
-  display: grid;
-  place-items: center;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
   padding: 20px;
+  isolation: isolate;
 }
 
-.modal__backdrop {
+#assessmentModal:not([hidden]) {
+  display: flex;
+}
+
+/*
+  El modal no debe recibir contenido del capítulo.
+  Solo assessmentContent y assessmentResult pueden aparecer aquí.
+*/
+#assessmentModal > .modal__backdrop {
   position: absolute;
   inset: 0;
+  z-index: 0;
   background: rgba(4, 10, 18, 0.62);
-  backdrop-filter: blur(6px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
-.modal__dialog {
+#assessmentModal > .modal__dialog {
   position: relative;
   z-index: 1;
+  isolation: isolate;
   width: min(100%, 980px);
   max-height: min(90vh, 860px);
   display: grid;
@@ -756,24 +783,116 @@ body.dark-mode .hero__card {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
+  opacity: 1;
+  filter: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
-.modal__header,
-.modal__footer {
+#assessmentModal .modal__header,
+#assessmentModal .modal__footer {
+  position: relative;
+  z-index: 2;
   padding: 18px 22px;
+  background: var(--bg-elevated);
   border-bottom: 1px solid var(--border);
+  filter: none;
 }
 
-.modal__footer {
+#assessmentModal .modal__footer {
   border-top: 1px solid var(--border);
   border-bottom: 0;
 }
 
-.modal__body {
+#assessmentModal .modal__body {
+  position: relative;
+  z-index: 2;
   overflow: auto;
   padding: 22px;
   display: grid;
   gap: 18px;
+  background: var(--bg-elevated);
+  filter: none;
+}
+
+#assessmentModal #assessmentContent,
+#assessmentModal #assessmentResult {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  gap: 16px;
+  background: transparent;
+  filter: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+#assessmentModal .assessment-card,
+#assessmentModal .question-card {
+  position: relative;
+  z-index: 4;
+  background: var(--bg-elevated);
+  filter: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* ---------- Overlay del menú móvil ---------- */
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 850;
+  background: rgba(2, 8, 20, 0.52);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.sidebar-overlay:not([hidden]) {
+  display: block;
+}
+
+/* ---------- Seguridad contra contenido detrás ---------- */
+
+#chapterContainer,
+#chapterContent,
+#presentationContainer,
+#objectivesContainer,
+#competenciesContainer,
+#timelineContainer,
+#philosophyContainer,
+#casesContainer,
+#referencesContainer {
+  position: relative;
+  z-index: 1;
+  filter: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/*
+  Si por error el visor del capítulo recibe una clase modal,
+  estas reglas lo devuelven al flujo normal.
+*/
+#chapterContent.modal,
+#chapterContainer.modal,
+#chapterContent.modal__dialog,
+#chapterContainer.modal__dialog {
+  position: relative;
+  inset: auto;
+  z-index: auto;
+  display: grid;
+  width: auto;
+  height: auto;
+  max-height: none;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  isolation: auto;
 }
 
 /* ---------- Botón volver arriba ---------- */
