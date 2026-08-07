@@ -1,1 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SIP SYSTEM INTELLIGENCE PLATFORM. Programa universitario interactivo sobre terapias de tercera generación.">
+  <meta name="author" content="SIP SYSTEM INTELLIGENCE PLATFORM">
+  <meta name="theme-color" content="#0a2340">
 
+  <title>SIP SYSTEM INTELLIGENCE PLATFORM | Terapias de Tercera Generación</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido-principal">Saltar al contenido</a>
+
+  <header class="site-header" id="inicio">
+    <div class="brand">
+      <img
+        class="brand__logo"
+        src="assets/icons/icon-192.png"
+        alt="Logo SIP SYSTEM INTELLIGENCE PLATFORM">
+      <div class="brand__text">
+        <p class="brand__eyebrow">SIP SYSTEM INTELLIGENCE PLATFORM</p>
+        <h1 class="brand__title">Terapias de Tercera Generación</h1>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <label class="search" for="searchInput">
+        <span class="search__icon" aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="Buscar en el programa..." autocomplete="off">
+      </label>
+
+      <button id="themeToggle" class="icon-button" type="button" aria-label="Activar o desactivar modo oscuro">
+        <span aria-hidden="true">◐</span>
+      </button>
+
+      <button id="menuToggle" class="icon-button" type="button" aria-label="Abrir menú lateral">
+        <span aria-hidden="true">☰</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="Menú lateral">
+      <div class="sidebar__header">
+        <h2>Índice</h2>
+        <button id="closeSidebar" class="icon-button" type="button" aria-label="Cerrar menú lateral">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <nav id="sidebarNav" class="sidebar__nav" aria-label="Navegación del curso">
+        <!-- Se llenará desde JavaScript -->
+      </nav>
+    </aside>
+
+    <main id="contenido-principal" class="main-content">
+      <section class="hero" id="portada">
+        <div class="hero__content">
+          <p class="hero__kicker">Curso universitario interactivo</p>
+          <h2>Programa académico de formación avanzada</h2>
+          <p>
+            Desarrollo científico, clínico y pedagógico sobre terapias de tercera generación,
+            con navegación dinámica, evaluación por capítulos, bibliografía verificable y
+            recursos visuales integrados.
+          </p>
+
+          <div class="hero__actions">
+            <a class="button button--primary" href="#capitulo-1">Iniciar capítulo 1</a>
+            <a class="button button--secondary" href="#indice-interactivo">Ver índice</a>
+          </div>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__orb"></div>
+          <div class="hero__card">
+            <span>Capítulo activo</span>
+            <strong>1</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="indice-interactivo">
+        <div class="section-title">
+          <p class="eyebrow">Navegación</p>
+          <h2>Índice interactivo</h2>
+        </div>
+        <div id="tocContainer" class="toc-container"></div>
+      </section>
+
+      <section class="panel" id="presentacion">
+        <div class="section-title">
+          <p class="eyebrow">Presentación</p>
+          <h2>Presentación del programa</h2>
+        </div>
+        <div id="presentationContainer"></div>
+      </section>
+
+      <section class="panel" id="objetivos">
+        <div class="section-title">
+          <p class="eyebrow">Objetivos</p>
+          <h2>Objetivos de aprendizaje</h2>
+        </div>
+        <div id="objectivesContainer"></div>
+      </section>
+
+      <section class="panel" id="competencias">
+        <div class="section-title">
+          <p class="eyebrow">Competencias</p>
+          <h2>Competencias del curso</h2>
+        </div>
+        <div id="competenciesContainer"></div>
+      </section>
+
+      <section class="panel" id="capitulo-1">
+        <div class="section-title">
+          <p class="eyebrow">Capítulo 1</p>
+          <h2 id="chapterTitle">Historia, evolución y fundamentos</h2>
+          <p id="chapterIntro"></p>
+        </div>
+        <div id="chapterContainer"></div>
+
+        <div class="assessment-launch">
+          <h3>Evaluación del capítulo 1</h3>
+          <p>Accede a la calificación interactiva del capítulo.</p>
+          <button id="openAssessment" class="button button--primary" type="button">
+            Evaluación capítulo 1
+          </button>
+        </div>
+      </section>
+
+      <section class="panel" id="linea-historica">
+        <div class="section-title">
+          <p class="eyebrow">Línea histórica</p>
+          <h2>Desarrollo histórico</h2>
+        </div>
+        <div id="timelineContainer"></div>
+      </section>
+
+      <section class="panel" id="bases-filosoficas">
+        <div class="section-title">
+          <p class="eyebrow">Bases filosóficas</p>
+          <h2>Fundamentos conceptuales</h2>
+        </div>
+        <div id="philosophyContainer"></div>
+      </section>
+
+      <section class="panel" id="casos-clinicos">
+        <div class="section-title">
+          <p class="eyebrow">Casos clínicos</p>
+          <h2>Casos interactivos</h2>
+        </div>
+        <div id="casesContainer"></div>
+      </section>
+
+      <section class="panel" id="bibliografia">
+        <div class="section-title">
+          <p class="eyebrow">Bibliografía</p>
+          <h2>Referencias APA 7</h2>
+        </div>
+        <div id="referencesContainer"></div>
+      </section>
+
+      <section class="panel" id="creditos">
+        <div class="section-title">
+          <p class="eyebrow">Créditos</p>
+          <h2>Créditos del proyecto</h2>
+        </div>
+        <p>
+          © SIP SYSTEM INTELLIGENCE PLATFORM. Proyecto académico interactivo desarrollado con HTML5, CSS3 y JavaScript Vanilla.
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <div id="assessmentModal" class="modal" hidden>
+    <div class="modal__backdrop" data-close-modal></div>
+
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="assessmentTitle">
+      <div class="modal__header">
+        <h2 id="assessmentTitle">Evaluación capítulo 1</h2>
+        <button id="closeAssessment" class="icon-button" type="button" aria-label="Cerrar evaluación">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <div id="assessmentContent" class="modal__body"></div>
+      <div id="assessmentResult" class="modal__footer"></div>
+    </div>
+  </div>
+
+  <button id="backToTop" class="back-to-top" type="button" aria-label="Volver arriba" hidden>↑</button>
+
+  <script src="data/chapter-01.js"></script>
+  <script src="data/references.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/assessments.js"></script>
+  <script src="js/app.js"></script>
+</body>
+  </html>
