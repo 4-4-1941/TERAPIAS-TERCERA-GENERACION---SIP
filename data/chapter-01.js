@@ -1,9 +1,3 @@
-/* ==========================================================
-   SIP SYSTEM INTELLIGENCE PLATFORM
-   data/chapter-01.js
-   Capítulo 1: Historia, evolución y fundamentos
-   ========================================================== */
-
 window.CHAPTER_01 = {
   id: "chapter-01",
   title: "Historia, evolución y fundamentos",
@@ -41,8 +35,8 @@ window.CHAPTER_01 = {
       type: "article",
       content: [
         "La noción de 'tercera generación' surgió para agrupar terapias que, sin abandonar la tradición conductual, desplazaron el foco desde el control directo del contenido cognitivo hacia la relación funcional con la experiencia interna.",
-        "En la literatura histórica, se reconoce que la terapia conductual y la TCC tradicional lograron alta eficacia para distintos problemas, pero también enfrentaron límites en poblaciones complejas, comorbilidad alta, recaídas y fenómenos transdiagnósticos.",
-        "La revisión de Hayes, Hofmann y colaboradores describe este cambio como una evolución hacia intervenciones que priorizan contexto, función, repertorios flexibles y procesos de cambio, en vez de tratar únicamente síndromes discretos [web:38][web:50]."
+        "En la literatura histórica, se reconoce que la terapia conductual y la TCC tradicional lograron eficacia para distintos problemas, pero también enfrentaron límites en poblaciones complejas, comorbilidad alta, recaídas y fenómenos transdiagnósticos.",
+        "La revisión de Hayes y colaboradores describe este cambio como una evolución hacia intervenciones que priorizan contexto, función, repertorios flexibles y procesos de cambio, en vez de tratar únicamente síndromes discretos."
       ]
     },
     {
@@ -61,8 +55,8 @@ window.CHAPTER_01 = {
       type: "article",
       content: [
         "La etiqueta 'tercera ola' o 'tercera generación' no designa una escuela homogénea. Funciona como una categoría histórica y pedagógica para describir terapias diversas que comparten afinidad por el contexto, la función y la aceptación de eventos privados.",
-        "Una revisión de 2011 incluyó entre estas terapias a DBT, ACT, terapia de esquemas, CBASP, MBCT, MCT y otros modelos de base contextual o transdiagnóstica [web:46][web:55].",
-        "En el desarrollo posterior, la formulación basada en procesos refinó esta idea y propuso estudiar dimensiones clínicas como cognición, afecto, atención, self, motivación y conducta observable [web:38][web:92]."
+        "Una revisión de 2011 incluyó entre estas terapias a DBT, ACT, terapia de esquemas, CBASP, MBCT y MCT como terapias de tercera ola de la psicoterapia cognitivo-conductual.",
+        "En el desarrollo posterior, la formulación basada en procesos refinó esta idea y propuso estudiar dimensiones clínicas como cognición, afecto, atención, self, motivación y conducta observable."
       ]
     },
     {
@@ -126,7 +120,7 @@ window.CHAPTER_01 = {
       content: [
         "El núcleo histórico de estas terapias es el desplazamiento desde 'qué piensa la persona' hacia 'qué función cumple esa experiencia en este contexto'.",
         "Esto modifica tanto la formulación como la técnica: la experiencia interna deja de ser solo un objeto a eliminar y se convierte en un fenómeno con el que el paciente puede relacionarse de formas más flexibles.",
-        "La literatura contemporánea enfatiza que esta transición favorece una clínica más idiográfica, especialmente útil en comorbilidad, problemas persistentes y cuadros complejos [web:38][web:50][web:92]."
+        "La literatura contemporánea enfatiza que esta transición favorece una clínica más idiográfica, especialmente útil en comorbilidad, problemas persistentes y cuadros complejos."
       ]
     },
     {
@@ -136,7 +130,7 @@ window.CHAPTER_01 = {
       content: [
         "La categoría 'tercera generación' es útil para organizar la historia, pero no implica superioridad automática sobre otras aproximaciones.",
         "Su valor real depende de la coherencia entre problema, proceso, técnica, competencia del terapeuta y contexto de aplicación.",
-        "En guías clínicas y revisiones recientes, la TCC sigue siendo primera línea en varios trastornos; las terapias de tercera generación aparecen como alternativas, complementos o propuestas especialmente útiles en determinados perfiles clínicos [web:85][web:87]."
+        "En guías clínicas y revisiones recientes, la TCC sigue siendo primera línea en varios trastornos; las terapias de tercera generación aparecen como alternativas, complementos o propuestas especialmente útiles en determinados perfiles clínicos."
       ]
     }
   ],
@@ -155,17 +149,17 @@ window.CHAPTER_01 = {
     {
       year: "1990–2004",
       title: "Transición contextual",
-      text: "Emergencia de ACT, DBT, FAP, MBCT, esquemas y terapias basadas en mindfulness."
+      text: "Emergencia de ACT, DBT, FAP, MBCT, terapia de esquemas, MCT y terapias basadas en mindfulness."
     },
     {
       year: "2004",
       title: "Formalización de la tercera ola",
-      text: "Hayes publica la formulación de ACT, RFT y la tercera ola en Behavior Therapy [web:39]."
+      text: "Hayes formuló explícitamente la relación entre ACT, RFT y la tercera ola de las terapias conductuales y cognitivas."
     },
     {
       year: "2021–actualidad",
       title: "Giro basado en procesos",
-      text: "La literatura se reorganiza alrededor de procesos transdiagnósticos, funcionalidad y precisión clínica [web:38][web:50][web:92]."
+      text: "La literatura reciente reorganiza la intervención en torno a procesos transdiagnósticos, función conductual, flexibilidad psicológica y precisión clínica."
     }
   ],
 
