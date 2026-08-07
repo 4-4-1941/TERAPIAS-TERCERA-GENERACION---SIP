@@ -1,10 +1,9 @@
 /* ==========================================================
    SIP SYSTEM INTELLIGENCE PLATFORM
    styles.css
-   Diseño académico premium, responsive y accesible
+   Versión corregida: capítulo separado de evaluación
    ========================================================== */
 
-/* ---------- Variables globales ---------- */
 :root {
   --bg: #f4f7fb;
   --bg-elevated: #ffffff;
@@ -24,12 +23,15 @@
   --radius-sm: 10px;
   --transition-fast: 160ms ease;
   --transition-base: 260ms ease;
-  --transition-slow: 420ms ease;
   --container: 1220px;
   --header-height: 76px;
+  --z-header: 900;
+  --z-sidebar: 950;
+  --z-overlay: 1100;
+  --z-modal: 1200;
+  --z-top: 1300;
 }
 
-/* ---------- Modo oscuro ---------- */
 body.dark-mode {
   --bg: #08111d;
   --bg-elevated: #101b2a;
@@ -43,16 +45,16 @@ body.dark-mode {
   --border: rgba(233, 240, 250, 0.12);
   --shadow: 0 20px 54px rgba(0, 0, 0, 0.36);
   --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.24);
-  background:
-    radial-gradient(circle at top, rgba(18, 58, 102, 0.28), transparent 35%),
-    linear-gradient(180deg, #07111b 0%, #091221 100%);
 }
 
-/* ---------- Reset base ---------- */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 html {
@@ -73,9 +75,19 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body.dark-mode {
+  background:
+    radial-gradient(circle at top, rgba(18, 58, 102, 0.28), transparent 35%),
+    linear-gradient(180deg, #07111b 0%, #091221 100%);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
 img {
-  max-width: 100%;
   display: block;
+  max-width: 100%;
 }
 
 button,
@@ -85,11 +97,6 @@ select {
   font: inherit;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 button {
   border: 0;
   background: none;
@@ -97,17 +104,21 @@ button {
   cursor: pointer;
 }
 
-/* ---------- Accesibilidad ---------- */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .skip-link {
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateY(-140%);
-  background: var(--primary);
-  color: #fff;
+  z-index: var(--z-top);
   padding: 12px 18px;
+  color: #fff;
+  background: var(--primary);
   border-radius: 0 0 12px 0;
-  z-index: 1000;
+  transform: translateY(-140%);
   transition: transform var(--transition-fast);
 }
 
@@ -115,29 +126,17 @@ button {
   transform: translateY(0);
 }
 
-/* ---------- Envoltorio general ---------- */
-.layout {
-  display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
-  gap: 24px;
-  width: min(100%, var(--container));
-  margin: 0 auto;
-  padding: 24px;
-}
-
-/* ---------- Header ---------- */
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 900;
+  z-index: var(--z-header);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
   min-height: var(--header-height);
   padding: 16px 24px;
-  backdrop-filter: blur(16px);
-  background: color-mix(in srgb, var(--bg-elevated) 82%, transparent);
+  background: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
   border-bottom: 1px solid var(--border);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.04);
 }
@@ -153,9 +152,8 @@ button {
   width: 54px;
   height: 54px;
   object-fit: contain;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 65%);
   border: 1px solid var(--border);
+  border-radius: 50%;
   box-shadow: var(--shadow-soft);
 }
 
@@ -165,17 +163,17 @@ button {
 
 .brand__eyebrow {
   margin: 0;
+  color: var(--text-muted);
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--text-muted);
 }
 
 .brand__title {
   margin: 2px 0 0;
   font-size: 1.15rem;
-  line-height: 1.15;
   font-weight: 800;
+  line-height: 1.15;
 }
 
 .header-actions {
@@ -190,15 +188,9 @@ button {
   gap: 10px;
   min-width: min(44vw, 420px);
   padding: 12px 16px;
-  border-radius: 999px;
   background: var(--bg-soft);
   border: 1px solid var(--border);
-  transition: border-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.search:focus-within {
-  border-color: color-mix(in srgb, var(--accent) 65%, var(--border));
-  transform: translateY(-1px);
+  border-radius: 999px;
 }
 
 .search__icon {
@@ -207,10 +199,10 @@ button {
 
 .search input {
   width: 100%;
-  border: 0;
-  outline: none;
-  background: transparent;
   color: var(--text);
+  background: transparent;
+  border: 0;
+  outline: 0;
 }
 
 .search input::placeholder {
@@ -218,22 +210,14 @@ button {
 }
 
 .icon-button {
-  width: 46px;
-  height: 46px;
-  border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 46px;
+  height: 46px;
   background: var(--bg-soft);
   border: 1px solid var(--border);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
-  transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
-}
-
-.icon-button:hover,
-.icon-button:focus-visible {
-  transform: translateY(-1px);
-  border-color: color-mix(in srgb, var(--accent) 60%, var(--border));
+  border-radius: 999px;
 }
 
 .icon-button:focus-visible,
@@ -244,23 +228,32 @@ input:focus-visible {
   outline-offset: 2px;
 }
 
-/* ---------- Sidebar ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 24px;
+  width: min(100%, var(--container));
+  margin: 0 auto;
+  padding: 24px;
+}
+
 .sidebar {
   position: sticky;
   top: calc(var(--header-height) + 24px);
+  z-index: 1;
   align-self: start;
   max-height: calc(100vh - var(--header-height) - 48px);
-  overflow: auto;
   padding: 18px;
-  border-radius: var(--radius-xl);
-  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-elevated) 95%, transparent), var(--bg-elevated));
+  overflow: auto;
+  background: var(--bg-elevated);
   border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow);
 }
 
 .sidebar__header {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 14px;
@@ -282,21 +275,13 @@ input:focus-visible {
   justify-content: space-between;
   gap: 10px;
   padding: 12px 14px;
-  border-radius: 14px;
-  background: transparent;
-  color: var(--text);
   border: 1px solid transparent;
-  transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  border-radius: 14px;
 }
 
-.sidebar__nav a:hover {
-  background: var(--bg-soft);
-  border-color: var(--border);
-  transform: translateX(2px);
-}
-
+.sidebar__nav a:hover,
 .sidebar__nav a.active {
-  background: color-mix(in srgb, var(--accent-soft) 70%, var(--bg-soft));
+  background: var(--accent-soft);
   border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
 }
 
@@ -304,21 +289,18 @@ input:focus-visible {
   color: var(--text-muted);
 }
 
-.sidebar__footer {
-  margin-top: 18px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-}
-
 .sidebar-overlay {
   position: fixed;
   inset: 0;
+  z-index: var(--z-overlay);
+  display: none;
   background: rgba(2, 8, 20, 0.52);
-  z-index: 850;
-  backdrop-filter: blur(4px);
 }
 
-/* ---------- Main content ---------- */
+.sidebar-overlay:not([hidden]) {
+  display: block;
+}
+
 .main-content {
   display: grid;
   gap: 24px;
@@ -327,7 +309,7 @@ input:focus-visible {
 
 .panel,
 .hero {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-elevated) 96%, transparent), var(--bg-elevated));
+  background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow);
@@ -341,15 +323,6 @@ input:focus-visible {
   margin-bottom: 18px;
 }
 
-.eyebrow {
-  margin: 0 0 6px;
-  font-size: 0.76rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  font-weight: 800;
-}
-
 .section-title h2,
 .hero h2 {
   margin: 0;
@@ -361,49 +334,38 @@ input:focus-visible {
   color: var(--text-muted);
 }
 
-/* ---------- Hero ---------- */
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
 .hero {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
   gap: 24px;
   padding: 30px;
   overflow: hidden;
-  position: relative;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: -20% auto auto -10%;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(200, 155, 60, 0.18), transparent 68%);
-  pointer-events: none;
-}
-
-.hero__content {
+.hero__content,
+.hero__visual {
   position: relative;
   z-index: 1;
 }
 
-.hero__kicker {
-  margin: 0 0 8px;
-  color: var(--accent);
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.78rem;
-}
-
 .hero h2 {
-  font-size: clamp(2rem, 4vw, 3.4rem);
   max-width: 12ch;
+  font-size: clamp(2rem, 4vw, 3.4rem);
 }
 
 .hero p {
-  color: var(--text-muted);
   max-width: 62ch;
+  color: var(--text-muted);
 }
 
 .hero__actions {
@@ -413,76 +375,37 @@ input:focus-visible {
   margin-top: 22px;
 }
 
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 46px;
-  padding: 0 18px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  font-weight: 700;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
-}
-
-.button:hover {
-  transform: translateY(-1px);
-}
-
-.button--primary {
-  background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 82%, #8a6110));
-  color: #132033;
-  box-shadow: 0 16px 28px rgba(200, 155, 60, 0.25);
-}
-
-.button--secondary {
-  background: var(--bg-soft);
-  border-color: var(--border);
-  color: var(--text);
-}
-
 .hero__visual {
-  position: relative;
-  min-height: 280px;
   display: grid;
   place-items: center;
+  min-height: 280px;
 }
 
 .hero__orb {
   width: 210px;
   height: 210px;
-  border-radius: 50%;
   background:
-    radial-gradient(circle at 35% 30%, rgba(255,255,255,0.78), rgba(255,255,255,0) 38%),
-    radial-gradient(circle at 50% 50%, rgba(10, 35, 64, 0.95), rgba(10, 35, 64, 0.65) 65%, rgba(10, 35, 64, 0.15) 100%);
-  box-shadow:
-    inset 0 0 0 12px rgba(255, 255, 255, 0.06),
-    0 18px 40px rgba(10, 35, 64, 0.25);
-  filter: saturate(1.12);
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,.78), transparent 38%),
+    radial-gradient(circle, rgba(10,35,64,.95), rgba(10,35,64,.65) 65%, rgba(10,35,64,.15));
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 12px rgba(255,255,255,.06), 0 18px 40px rgba(10,35,64,.25);
 }
 
 .hero__card {
   position: absolute;
-  bottom: 20px;
   right: 20px;
+  bottom: 20px;
   display: grid;
   gap: 4px;
-  padding: 16px 18px;
   min-width: 132px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.76);
-  color: #102033;
-  border: 1px solid rgba(255,255,255,0.4);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
-  backdrop-filter: blur(12px);
-}
-
-body.dark-mode .hero__card {
-  background: rgba(18, 28, 44, 0.78);
+  padding: 16px 18px;
   color: var(--text);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
 }
 
-/* ---------- Contenedores base ---------- */
 .toc-container,
 #presentationContainer,
 #objectivesContainer,
@@ -492,22 +415,36 @@ body.dark-mode .hero__card {
 #philosophyContainer,
 #casesContainer,
 #referencesContainer,
-#assessmentContent {
+#assessmentContent,
+#assessmentResult {
   display: grid;
   gap: 16px;
+}
+
+#chapterContainer,
+#presentationContainer,
+#objectivesContainer,
+#competenciesContainer,
+#timelineContainer,
+#philosophyContainer,
+#casesContainer,
+#referencesContainer {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+  filter: none;
+  backdrop-filter: none;
 }
 
 .loading-state {
   margin: 0;
   padding: 18px;
-  border-radius: var(--radius-md);
-  background: var(--bg-soft);
   color: var(--text-muted);
+  background: var(--bg-soft);
   border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
 }
 
-/* ---------- Tarjetas ---------- */
-.card,
 .content-card,
 .metric-card,
 .assessment-card,
@@ -516,7 +453,8 @@ body.dark-mode .hero__card {
 .glossary-card,
 .objective-card,
 .competency-card,
-.timeline-card {
+.timeline-card,
+.question-card {
   background: var(--bg-soft);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -529,7 +467,8 @@ body.dark-mode .hero__card {
 .glossary-card,
 .objective-card,
 .competency-card,
-.timeline-card {
+.timeline-card,
+.question-card {
   padding: 18px;
 }
 
@@ -538,33 +477,7 @@ body.dark-mode .hero__card {
   gap: 18px;
 }
 
-.content-grid--two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.feature-list {
-  margin: 0;
-  padding-left: 20px;
-  color: var(--text-muted);
-}
-
-.metric-card {
-  padding: 16px;
-  display: grid;
-  gap: 2px;
-  text-align: center;
-}
-
-.metric-card strong {
-  font-size: 1.25rem;
-}
-
-.metric-card span {
-  color: var(--text-muted);
-  font-size: 0.92rem;
-}
-
-/* ---------- Objetivos / competencias ---------- */
+.content-grid--two,
 .objective-grid,
 .competency-grid,
 .glossary-grid {
@@ -573,10 +486,35 @@ body.dark-mode .hero__card {
   gap: 16px;
 }
 
+.feature-list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text-muted);
+}
+
+.timeline-card {
+  position: relative;
+  padding-left: 26px;
+}
+
+.timeline-card::before {
+  position: absolute;
+  top: 22px;
+  left: 10px;
+  width: 10px;
+  height: 10px;
+  content: "";
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px var(--accent-soft);
+}
+
 .objective-card h3,
 .competency-card h3,
-.glossary-card h3 {
-  margin: 0 0 8px;
+.glossary-card h3,
+.case-card h3,
+.reference-card h3 {
+  margin-top: 0;
 }
 
 .objective-card p,
@@ -586,110 +524,49 @@ body.dark-mode .hero__card {
   color: var(--text-muted);
 }
 
-/* ---------- Timeline ---------- */
-.timeline-card {
-  position: relative;
-  padding-left: 22px;
-}
-
-.timeline-card::before {
-  content: "";
-  position: absolute;
-  left: 10px;
-  top: 22px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 6px var(--accent-soft);
-}
-
-/* ---------- Acordeones / tabs / datos ---------- */
-.accordion-item,
-.tab-panel {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--bg-elevated);
-  overflow: hidden;
-}
-
-.accordion-trigger {
-  width: 100%;
-  padding: 16px 18px;
-  text-align: left;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.accordion-panel,
-.tab-panel__content {
-  padding: 0 18px 18px;
-  color: var(--text-muted);
-}
-
-.tab-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.tab-button {
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
-}
-
-.tab-button[aria-selected="true"] {
-  background: var(--primary);
-  color: #fff;
-}
-
-/* ---------- Casos ---------- */
-.case-card h3,
-.reference-card h3 {
-  margin-top: 0;
-}
-
-.case-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 12px 0;
-  color: var(--text-muted);
-  font-size: 0.92rem;
-}
-
 .case-badge {
   display: inline-flex;
   align-items: center;
   padding: 5px 10px;
-  border-radius: 999px;
-  background: var(--accent-soft);
   color: var(--accent);
   font-weight: 700;
+  background: var(--accent-soft);
+  border-radius: 999px;
 }
 
-/* ---------- Evaluación ---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  border-radius: 999px;
+}
+
+.button--primary {
+  color: #132033;
+  background: var(--accent);
+}
+
+.button--secondary {
+  color: var(--text);
+  background: var(--bg-soft);
+  border-color: var(--border);
+}
+
 .assessment-launch {
   margin-top: 20px;
   padding: 22px;
-  border-radius: var(--radius-lg);
+  background: var(--accent-soft);
   border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
-  background: linear-gradient(180deg, var(--accent-soft), transparent);
-}
-
-.assessment-launch h3 {
-  margin-top: 0;
+  border-radius: var(--radius-lg);
 }
 
 .assessment-card {
   padding: 20px;
-  background: linear-gradient(180deg, var(--bg-elevated), var(--bg-soft));
+  background: var(--bg-elevated);
 }
 
 .assessment-card__details {
@@ -701,10 +578,7 @@ body.dark-mode .hero__card {
 }
 
 .question-card {
-  padding: 18px;
-  border-radius: var(--radius-md);
   background: var(--bg-elevated);
-  border: 1px solid var(--border);
 }
 
 .question-options {
@@ -715,78 +589,62 @@ body.dark-mode .hero__card {
 
 .option {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   gap: 10px;
   padding: 12px 14px;
-  border-radius: 14px;
   background: var(--bg-soft);
   border: 1px solid transparent;
+  border-radius: 14px;
 }
 
 .option input {
   margin-top: 3px;
 }
 
-/* ---------- Modal ---------- */
-/* ---------- Corrección segura de visibilidad ---------- */
-
-[hidden] {
-  display: none !important;
-}
-
-body.modal-open {
-  overflow: hidden;
-}
-
-/* ---------- Modal de evaluación ---------- */
+/* ==========================================================
+   MODAL: SOLO EVALUACIÓN
+   El capítulo nunca usa estas reglas
+   ========================================================== */
 
 #assessmentModal {
   position: fixed;
   inset: 0;
-  z-index: 1200;
+  z-index: var(--z-modal);
   display: none;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
   padding: 20px;
-  isolation: isolate;
 }
 
 #assessmentModal:not([hidden]) {
   display: flex;
 }
 
-/*
-  El modal no debe recibir contenido del capítulo.
-  Solo assessmentContent y assessmentResult pueden aparecer aquí.
-*/
 #assessmentModal > .modal__backdrop {
   position: absolute;
   inset: 0;
   z-index: 0;
   background: rgba(4, 10, 18, 0.62);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  pointer-events: auto;
 }
 
 #assessmentModal > .modal__dialog {
   position: relative;
   z-index: 1;
-  isolation: isolate;
-  width: min(100%, 980px);
-  max-height: min(90vh, 860px);
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
+  width: min(100%, 980px);
+  max-height: min(90vh, 860px);
   overflow: hidden;
-  border-radius: 28px;
   background: var(--bg-elevated);
   border: 1px solid var(--border);
+  border-radius: 28px;
   box-shadow: var(--shadow);
   opacity: 1;
   filter: none;
   backdrop-filter: none;
-  -webkit-backdrop-filter: none;
 }
 
 #assessmentModal .modal__header,
@@ -796,7 +654,6 @@ body.modal-open {
   padding: 18px 22px;
   background: var(--bg-elevated);
   border-bottom: 1px solid var(--border);
-  filter: none;
 }
 
 #assessmentModal .modal__footer {
@@ -807,12 +664,11 @@ body.modal-open {
 #assessmentModal .modal__body {
   position: relative;
   z-index: 2;
-  overflow: auto;
-  padding: 22px;
   display: grid;
   gap: 18px;
+  padding: 22px;
+  overflow-y: auto;
   background: var(--bg-elevated);
-  filter: none;
 }
 
 #assessmentModal #assessmentContent,
@@ -822,9 +678,9 @@ body.modal-open {
   display: grid;
   gap: 16px;
   background: transparent;
+  opacity: 1;
   filter: none;
   backdrop-filter: none;
-  -webkit-backdrop-filter: none;
 }
 
 #assessmentModal .assessment-card,
@@ -832,89 +688,48 @@ body.modal-open {
   position: relative;
   z-index: 4;
   background: var(--bg-elevated);
+  opacity: 1;
   filter: none;
   backdrop-filter: none;
-  -webkit-backdrop-filter: none;
 }
 
-/* ---------- Overlay del menú móvil ---------- */
-
-.sidebar-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 850;
-  background: rgba(2, 8, 20, 0.52);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-.sidebar-overlay:not([hidden]) {
-  display: block;
-}
-
-/* ---------- Seguridad contra contenido detrás ---------- */
-
+/* Evita que el contenido normal se convierta en modal */
 #chapterContainer,
-#chapterContent,
-#presentationContainer,
-#objectivesContainer,
-#competenciesContainer,
-#timelineContainer,
-#philosophyContainer,
-#casesContainer,
-#referencesContainer {
+#chapterContent {
   position: relative;
   z-index: 1;
-  filter: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-/*
-  Si por error el visor del capítulo recibe una clase modal,
-  estas reglas lo devuelven al flujo normal.
-*/
-#chapterContent.modal,
-#chapterContainer.modal,
-#chapterContent.modal__dialog,
-#chapterContainer.modal__dialog {
-  position: relative;
-  inset: auto;
-  z-index: auto;
   display: grid;
   width: auto;
   height: auto;
   max-height: none;
   padding: 0;
   overflow: visible;
+  background: transparent;
   border: 0;
   border-radius: 0;
-  background: transparent;
   box-shadow: none;
-  isolation: auto;
+  opacity: 1;
+  filter: none;
+  backdrop-filter: none;
 }
 
-/* ---------- Botón volver arriba ---------- */
 .back-to-top {
   position: fixed;
   right: 18px;
   bottom: 18px;
+  z-index: var(--z-top);
   width: 48px;
   height: 48px;
-  border-radius: 999px;
-  background: var(--primary);
   color: #fff;
+  background: var(--primary);
+  border-radius: 999px;
   box-shadow: var(--shadow);
-  z-index: 1000;
 }
 
-/* ---------- Utilidades ---------- */
 .hidden {
   display: none !important;
 }
 
-/* ---------- Responsive ---------- */
 @media (max-width: 1120px) {
   .layout {
     grid-template-columns: 1fr;
@@ -922,12 +737,12 @@ body.modal-open {
 
   .sidebar {
     position: fixed;
-    left: 16px;
     top: 16px;
     bottom: 16px;
+    left: 16px;
+    z-index: var(--z-sidebar);
     width: min(88vw, 340px);
     max-height: none;
-    z-index: 950;
     transform: translateX(-120%);
     transition: transform var(--transition-base);
   }
@@ -944,7 +759,6 @@ body.modal-open {
 @media (max-width: 860px) {
   .site-header {
     flex-wrap: wrap;
-    gap: 14px;
   }
 
   .header-actions {
@@ -953,8 +767,8 @@ body.modal-open {
   }
 
   .search {
-    min-width: 0;
     flex: 1;
+    min-width: 0;
   }
 
   .hero,
@@ -991,12 +805,12 @@ body.modal-open {
     font-size: 1rem;
   }
 
-  .modal {
+  #assessmentModal {
     padding: 10px;
   }
 
-  .modal__dialog {
+  #assessmentModal > .modal__dialog {
     max-height: 94vh;
     border-radius: 20px;
   }
-  }
+}
